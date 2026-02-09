@@ -1,0 +1,12 @@
+# Processamento de Dados
+pandas
+numpy
+openpyxl
+
+# Dashboard e Visualização
+streamlit
+plotly
+Pillow
+
+# Outros (Dependências implícitas)
+datetime
