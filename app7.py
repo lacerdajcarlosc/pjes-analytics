@@ -7,7 +7,6 @@ import plotly.express as px
 import os
 from io import BytesIO
 
-from app5 import formatar_valor, mostrar_tabela_download
 
 st.set_page_config(page_title="PJES Dashboard", page_icon="📊", layout="wide")
 
@@ -24,6 +23,23 @@ def moeda(v):
 
 def numero(v):
     return f"{int(v):,}".replace(",", ".")
+
+def formatar_valor(v):
+    return f"R$ {v:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+def mostrar_tabela_download(df, nome_arquivo, titulo):
+    st.subheader(titulo)
+    st.dataframe(df, use_container_width=True, height=300, hide_index=True)
+
+    buf = BytesIO()
+    df.to_excel(buf, index=False)
+
+    st.download_button(
+        "📥 Baixar Tabela",
+        buf.getvalue(),
+        nome_arquivo,
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )   
 
 def filtro_texto(col):
     return ["Todos"] + sorted(
