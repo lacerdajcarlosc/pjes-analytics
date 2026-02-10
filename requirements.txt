@@ -10,3 +10,4 @@ Pillow
 
 # Outros (Dependências implícitas)
 datetime
+altair==5.3.0

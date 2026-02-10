@@ -1,0 +1,3 @@
+LOG DE ERROS - PROCESSAMENTO PJES COM NORMALIZAÇÃO
+============================================================
+• Erro ao processar o arquivo '08 LISTA_ANALITICO POR RUBR_155699 - 1923 Bruto.xlsx': Worksheet named 'Planilha de PJES' not found

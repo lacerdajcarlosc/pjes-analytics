@@ -1,0 +1,45 @@
+# ================================
+# ARQUIVOS DO OFFICE/EXCEL
+# ================================
+*.xlsx
+*.xls
+*.xlsm
+*.xlsb
+*.csv
+
+# ================================
+# CONFIGURAÇÕES DO SISTEMA
+# ================================
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# ================================
+# CONFIGURAÇÕES DO VS CODE
+# ================================
+.vscode/
+*.code-workspace
+
+# ================================
+# CONFIGURAÇÕES DO PYTHON
+# ================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.env
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# ================================
+# CONFIGURAÇÕES DO STREAMLIT
+# ================================
+.streamlit/secrets.toml

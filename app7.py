@@ -16,9 +16,10 @@ st.set_page_config(page_title="PJES Dashboard", page_icon="📊", layout="wide")
 
 @st.cache_data
 def load_data():
-    return pd.read_excel("PJES.xlsx")
+    return pd.read_excel("dados.xlsx")
 
 def moeda(v):
+
     return f"R$ {v:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 def numero(v):
@@ -291,8 +292,10 @@ cols = [
 ]
 
 df_tab = df_f[cols].sort_values("TOTAL", ascending=False)
+df_tab_display = df_tab.copy()
+df_tab_display["MATRICULA"] = df_tab_display["MATRICULA"].astype(str).str.replace(",", "").str.replace(".", "")
 
-st.dataframe(df_tab, use_container_width=True, height=400,hide_index=True)
+st.dataframe(df_tab_display, use_container_width=True, height=400,hide_index=True)
 
 buf = BytesIO()
 df_tab.to_excel(buf, index=False)
@@ -324,10 +327,12 @@ if not df_223.empty:
     ).reset_index()
 
     pivot223.columns.name = None
+    pivot223_display = pivot223.copy()
+    pivot223_display["MATRICULA"] = pivot223_display["MATRICULA"].astype(str).str.replace(",", "").str.replace(".", "")
     pivot223["TOTAL GERAL"] = pivot223.iloc[:, 2:].sum(axis=1)
     pivot223 = pivot223.sort_values("TOTAL GERAL", ascending=False)
 
-    st.dataframe(pivot223, use_container_width=True, height=400, hide_index=True)
+    st.dataframe(pivot223_display, use_container_width=True, height=400, hide_index=True)
 
     buf223 = BytesIO()
     pivot223.to_excel(buf223, index=False)
