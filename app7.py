@@ -11,12 +11,34 @@ from io import BytesIO
 st.set_page_config(page_title="PJES Dashboard", page_icon="📊", layout="wide")
 
 # =====================
+# ESTILO (UX)
+# =====================
+st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        div[data-testid="stMetric"] {
+            background-color: #0e1117;
+            padding: 12px;
+            border-radius: 12px;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+# =====================
 # FUNÇÕES
 # =====================
+file = st.file_uploader("📁 Carregar arquivo Excel", type=["xlsx"])
 
 @st.cache_data
-def load_data():
-    return pd.read_excel("dados.xlsx")
+def load_data(file):
+    if file is None:
+        return pd.DataFrame()
+    return pd.read_excel(file)
 
 def moeda(v):
 
@@ -55,7 +77,13 @@ def filtro_texto(col):
 # DADOS
 # =====================
 
-df = load_data()
+df = load_data(file)
+
+if df.empty:
+    st.warning("📁 Carregue um arquivo Excel para iniciar o dashboard.")
+    st.stop()
+
+df.columns = df.columns.str.strip().str.upper()
 
 mapa_meses = {
     "January": "JANEIRO", "February": "FEVEREIRO", "March": "MARÇO",
